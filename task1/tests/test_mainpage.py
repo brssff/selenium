@@ -1,5 +1,10 @@
-"""Написать тесты проверяющие наличие элементов на разных страницах приложения opencart.
-Реализовать минимум пять тестов (одни тест = одна страница приложения). Использовать методы явного ожидания элементов.
-Какие элементы проверять определить самостоятельно, но не меньше 5 для каждой страницы.
-Покрыть нужно:
-    2.1 Главную"""
+import pytest
+
+BASE_URL = 'https://www.opencart.ru/'
+CSS_SELECTORS = ['#button-demo', '.btn.button-green', '.suport__link', '.login', '#cart-total-img', '.header-logo']
+
+
+@pytest.mark.parametrize('selector', CSS_SELECTORS)
+def test_main_page(browser, selector):
+    browser.get(BASE_URL)
+    assert browser.find_element_by_css_selector(selector)

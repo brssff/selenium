@@ -10,7 +10,7 @@ def pytest_addoption(parser):
     parser.addoption("--maximized", action="store_true", help="Maximize browser window")
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
-    parser.addoption("--opencart", action="store_true", help="opencart base url")
+    parser.addoption("--base_url", action="store", help="opencart base url", default='https://www.opencart.ru')
 
 
 @pytest.fixture(scope="session")
@@ -18,7 +18,6 @@ def browser(request):
     browser = request.config.getoption('--browser')
     headless = request.config.getoption('--headless')
     maximized = request.config.getoption('--maximized')
-    opencart = request.config.getoption('--opencart')
 
     if browser == 'chrome':
         options = webdriver.ChromeOptions()
@@ -47,7 +46,9 @@ def browser(request):
     if maximized:
         driver.maximize_window()
 
-    #TODO: доработать как будет ясно что по ключу --opencart должно происходить
-    if opencart:
-        base_url = 'https://www.opencart.ru/'
     return driver
+
+
+@pytest.fixture
+def base_url(request):
+    return request.config.getoption("base_url")
