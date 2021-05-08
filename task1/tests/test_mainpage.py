@@ -1,7 +1,8 @@
 import pytest
 
-BASE_URL = 'https://www.opencart.ru/'
-CSS_SELECTORS = ['#button-demo', '.btn.button-green', '.suport__link', '.login', '#cart-total-img', '.header-logo']
+BASE_URL = 'https://demo.opencart.com/'
+CSS_SELECTORS = ['.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle', '.form-control.input-lg',
+                 '.swiper-wrapper', '.fa.fa-phone', '#logo']
 
 
 @pytest.mark.parametrize('selector', CSS_SELECTORS)

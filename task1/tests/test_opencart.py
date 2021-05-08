@@ -10,8 +10,8 @@
 
 
 def test_opencart(browser):
-    browser.get('https://www.opencart.ru/')
-    assert browser.title == 'Opencart.ru: разработка сайтов и модулей на платформе опенкарт'
+    browser.get('https://demo.opencart.com/')
+    assert browser.title == 'Your Store'
 
 
 # 1.4. Добавить опцию командной строки, которая указывает базовый URL opencart.
