@@ -1,12 +1,17 @@
 import pytest
+from ..helper import assert_element
 
-URL = 'https://www.opencart.ru/index.php?route=account/login'
-CSS_SELECTORS = ['.breadcrumb.blog', '.btn.btn-primary[href]', '.btn.btn-primary[type]',
-                 '.list-group .list__group-item:nth-child(3)', '.header-logo', '.login__main .grn:nth-child(2)']
+URL = 'https://demo.opencart.com/index.php?route=account/login'
+CSS_SELECTORS = ['.breadcrumb', '.btn.btn-primary[href]', '.btn.btn-primary[type]',
+                 '#column-right', '#logo', '#top', 'footer']
 
 
-@pytest.mark.parametrize('selectors', CSS_SELECTORS,
-                         ids=['Breadcrumbs', 'Continue', 'Login', 'Forgot pass', 'Logo', 'How to install'])
+@pytest.mark.parametrize('selectors', CSS_SELECTORS)
 def test_login_page(browser, selectors):
     browser.get(URL)
-    assert selectors
+    assert_element(selectors, browser)
+
+
+def test_can_redirect_to_register_page(browser):
+    browser.find_element_by_css_selector('.btn.btn-primary[href]').click()
+    assert 'route=account/register' in browser.current_url
