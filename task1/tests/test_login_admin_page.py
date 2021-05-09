@@ -1,15 +1,17 @@
-import pytest
-
 from ..helper import assert_element
 
 URL = 'https://demo.opencart.com/admin/'
-CSS_SELECTORS = ['#header-logo', '#input-username', '#input-password', '.help-block', '.btn.btn-primary', '#footer']
 
 
-@pytest.mark.parametrize('selector', CSS_SELECTORS)
-def test_login_admin_page(browser, selector):
+def test_login_admin_page(browser):
     browser.get(URL)
-    assert_element(selector, browser)
+
+    assert_element('#header-logo', browser)
+    assert_element('#input-username', browser)
+    assert_element('#input-password', browser)
+    assert_element('.help-block', browser)
+    assert_element('.btn.btn-primary', browser)
+    assert_element('#footer', browser)
 
 
 def test_ability_to_log_in(browser):
