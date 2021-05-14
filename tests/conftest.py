@@ -3,7 +3,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.opera.options import Options as OperaOptions
 
-DRIVERS = os.path.expanduser("~/develop/selenium/drivers")
+DRIVERS = os.path.expanduser("~/develop/selenium_prj/drivers")
 
 
 def pytest_addoption(parser):
