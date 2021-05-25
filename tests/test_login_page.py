@@ -1,19 +1,19 @@
 from ..helper import assert_element
+from .locators.login_page import LoginPage
 
-URL = 'https://demo.opencart.com/index.php?route=account/login'
 
-
-def test_login_page(browser,):
-    browser.get(URL)
-    assert_element('.breadcrumb', browser)
-    assert_element('.btn.btn-primary[href]', browser)
-    assert_element('.btn.btn-primary[type]', browser)
-    assert_element('#column-right', browser)
-    assert_element('#logo', browser)
-    assert_element('#top', browser)
-    assert_element('footer', browser)
+def test_login_page(browser):
+    browser.get(LoginPage.URL)
+    assert_element(LoginPage.BREADCRUMBS[1], browser)
+    assert_element(LoginPage.CONTINUE_BTN[1], browser)
+    assert_element(LoginPage.LOGIN_BTN[1], browser)
+    assert_element(LoginPage.RIGHT_COLUMN[1], browser)
+    assert_element(LoginPage.LOGO[1], browser)
+    assert_element(LoginPage.HEADER[1], browser)
+    assert_element(LoginPage.FOOTER[1], browser)
 
 
 def test_can_redirect_to_register_page(browser):
-    browser.find_element_by_css_selector('.btn.btn-primary[href]').click()
-    assert 'route=account/register' in browser.current_url
+    browser.get(LoginPage.URL)
+    browser.find_element(*LoginPage.CONTINUE_BTN).click()
+    assert browser.title == 'Register Account'
