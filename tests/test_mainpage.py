@@ -1,12 +1,21 @@
-from ..helper import assert_element
-
-BASE_URL = 'https://demo.opencart.com/'
+from .locators.MainPage import MainPage
 
 
 def test_main_page(browser):
-    browser.get(BASE_URL)
-    assert_element('.btn.btn-inverse.btn-block.btn-lg.dropdown-toggle', browser)
-    assert_element('.form-control.input-lg', browser)
-    assert_element('.swiper-wrapper', browser)
-    assert_element('.fa.fa-phone', browser)
-    assert_element('#logo', browser)
+    browser.get(MainPage.BASE_URL)
+    browser.find_element(*MainPage.CART_BUTTON)
+    browser.find_element(*MainPage.SEARCH_INPUT)
+    browser.find_element(*MainPage.PHONE)
+    browser.find_element(*MainPage.LOGO)
+    assert len(browser.find_elements(*MainPage.SWIPERS)) == 2
+
+"""
+Научиться реализовывать PageObject шаблон в автотестах.
+
+Переписать уже имеющиеся тесты в проекте opencart на PageObject паттерн.
+Добавить автотесты на следующие сценарии.
+    Добавление нового товара в разделе администратора.
+    Удаление товара из списка в разделе администартора.
+    Регистрация нового пользователя в магазине опенкарта.
+    Переключение валют из верхнего меню опенкарта.
+"""
