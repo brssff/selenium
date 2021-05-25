@@ -1,4 +1,4 @@
-from .locators.MainPage import MainPage
+from .locators.main_page import MainPage
 
 
 def test_main_page(browser):

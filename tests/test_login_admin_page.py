@@ -1,5 +1,5 @@
 from ..helper import assert_element
-from .locators.AdminLoginPage import AdminLoginPage
+from .locators.admin_login_page import AdminLoginPage
 
 
 def test_admin_login_page(browser):

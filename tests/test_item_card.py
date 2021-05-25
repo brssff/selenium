@@ -1,5 +1,5 @@
 from ..helper import assert_element
-from .locators.CardPage import CardPage
+from .locators.card_page import CardPage
 
 URL = 'https://demo.opencart.com/index.php?route=product/product&path=57&product_id=49'
 
