@@ -1,7 +1,9 @@
 from selenium.webdriver.common.by import By
 
 
-class Catalog:
+class CatalogPage:
+    URL = 'https://demo.opencart.com/index.php?route=product/category&path=20'
+
     LOGO = (By.CSS_SELECTOR, '#logo')
     CATALOG_COLUMN = (By.CSS_SELECTOR, '#column-left')
     SEARCH_INPUT = (By.CSS_SELECTOR, '#search')

@@ -1,19 +1,18 @@
 from ..helper import assert_element
-from .locators.Catalog import Catalog
-URL = 'https://demo.opencart.com/index.php?route=product/category&path=20'
+from .locators.CatalogPage import CatalogPage
 
 
-def test_catalog(browser):
-    browser.get(URL)
-    browser.find_element(*Catalog.LOGO)
-    browser.find_element(*Catalog.CATALOG_COLUMN)
-    browser.find_element(*Catalog.SEARCH_INPUT)
-    browser.find_element(*Catalog.LIST_VIEW)
-    browser.find_element(*Catalog.GRID_VIEW)
-    browser.find_element(*Catalog.SORT_BY)
-    browser.find_element(*Catalog.SHOW_LIMIT)
-    browser.find_element(*Catalog.FOOTER)
-    assert_element(Catalog.FOOTER[1], browser, timeout=2)
+def test_catalog_page(browser):
+    browser.get(CatalogPage.URL)
+    browser.find_element(*CatalogPage.LOGO)
+    browser.find_element(*CatalogPage.CATALOG_COLUMN)
+    browser.find_element(*CatalogPage.SEARCH_INPUT)
+    browser.find_element(*CatalogPage.LIST_VIEW)
+    browser.find_element(*CatalogPage.GRID_VIEW)
+    browser.find_element(*CatalogPage.SORT_BY)
+    browser.find_element(*CatalogPage.SHOW_LIMIT)
+    browser.find_element(*CatalogPage.FOOTER)
+    assert_element(CatalogPage.FOOTER[1], browser, timeout=2)
 
-    product_thumbs = browser.find_elements(*Catalog.PRODUCT_THUMB)
+    product_thumbs = browser.find_elements(*CatalogPage.PRODUCT_THUMB)
     assert len(product_thumbs) == 12, f"Thumbs on page: {len(product_thumbs)}, but 12 expected"
