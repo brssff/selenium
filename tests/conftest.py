@@ -10,7 +10,7 @@ def pytest_addoption(parser):
     parser.addoption("--maximized", action="store_true", help="Maximize browser window")
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
-    parser.addoption("--base_url", action="store", help="opencart base url", default='https://demo.opencart.com/')
+    parser.addoption("--url", default='https://demo.opencart.com/')
 
 
 @pytest.fixture(scope="session")
