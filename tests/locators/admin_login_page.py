@@ -16,6 +16,7 @@ class AdminLoginPage(BasePage):
         return self.browser.get(url)
 
     def log_in(self):
+        self.open(self.URL)
         self.browser.find_element(*self.USERNAME).clear()
         self.browser.find_element(*self.USERNAME).send_keys("demo")
         self.browser.find_element(*self.PASSWORD).clear()

@@ -11,6 +11,7 @@ def pytest_addoption(parser):
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
     parser.addoption("--url", default='https://demo.opencart.com/')
+    parser.addoption("--timeout", type=int, default=2)
 
 
 @pytest.fixture(scope="session")
@@ -47,6 +48,8 @@ def browser(request):
         driver.maximize_window()
 
     return driver
+
+
 
 
 @pytest.fixture
