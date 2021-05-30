@@ -1,5 +1,6 @@
 from ..helper import assert_element
 from .locators.card_page import CardPage
+from selenium.webdriver.common.by import By
 
 URL = 'https://demo.opencart.com/index.php?route=product/product&path=57&product_id=49'
 
@@ -14,4 +15,4 @@ def test_product_card(browser):
 
     # добавить товар в корзину и получить сообщение об успешном действии
     browser.find_element(*CardPage.ADD_TO_CART).click()
-    assert_element('.alert.alert-success.alert-dismissible', browser, timeout=2)
+    assert_element((By.CSS_SELECTOR, '.alert.alert-success.alert-dismissible'), browser, timeout=2)

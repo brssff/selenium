@@ -25,9 +25,9 @@ class DashboardPage(BasePage):
     # выбор случайного чекбокса (кроме общего) и удаление продукта
     def delete_random_product(self):
         checkboxes = len(self.browser.find_elements(*self.TABLE_CHECKBOX))
-        self.browser.find_elements(*self.TABLE_CHECKBOX)[random.randint(1, checkboxes)].click()
+        self.browser.find_elements(*self.TABLE_CHECKBOX)[random.randint(1, checkboxes-1)].click()
         self.browser.find_element(*self.TRASH_BUTTON).click()
-        self.browser.switch_to_alert().accept()
+        self.browser.switch_to.alert.accept()
         assert self.browser.find_element(*self.WARNING_MSG)
 
     # добавление нового продукта
