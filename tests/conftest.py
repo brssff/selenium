@@ -9,7 +9,7 @@ SCREENSHOTS = os.path.expanduser("~/develop/selenium_prj/screenshots")
 
 
 def pytest_addoption(parser):
-    parser.addoption("--maximized", action="store_true", help="Maximize browser window")
+    parser.addoption("--maximized", action="store_true", default=True, help="Maximize browser window")
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
     parser.addoption("--url", default='https://demo.opencart.com/')

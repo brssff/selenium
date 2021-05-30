@@ -1,5 +1,5 @@
 from ..helper import assert_element
-from .locators.card_page import CardPage
+from .pages.card_page import CardPage
 from selenium.webdriver.common.by import By
 
 URL = 'https://demo.opencart.com/index.php?route=product/product&path=57&product_id=49'

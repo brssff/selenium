@@ -1,5 +1,5 @@
-from .locators.admin_login_page import AdminLoginPage
-from .locators.dashboard_page import DashboardPage
+from tests.pages.admin_login_page import AdminLoginPage
+from tests.pages.dashboard_page import DashboardPage
 
 
 def test_delete_product(browser):
