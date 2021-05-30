@@ -3,7 +3,7 @@ from tests.pages.base_page import BasePage
 
 
 class LoginPage(BasePage):
-    URL = 'https://demo.opencart.com/index.php?route=account/login'
+    PATH = 'index.php?route=account/login'
 
     LOGO = (By.CSS_SELECTOR, '#logo')
     HEADER = (By.CSS_SELECTOR, '#top')
@@ -14,5 +14,5 @@ class LoginPage(BasePage):
     RIGHT_COLUMN = (By.CSS_SELECTOR, '#column-right')
 
     def nav_to_register_page(self):
-        self.open(self.URL)
+        self.browser.open(self.PATH)
         self.browser.find_element(*self.CONTINUE_BTN).click()

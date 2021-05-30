@@ -3,7 +3,7 @@ from helper import assert_element
 
 
 def test_login_page(browser):
-    browser.get(LoginPage.URL)
+    browser.open(LoginPage.PATH)
     assert_element(LoginPage.BREADCRUMBS, browser)
     assert_element(LoginPage.CONTINUE_BTN, browser)
     assert_element(LoginPage.LOGIN_BTN, browser)
@@ -14,6 +14,6 @@ def test_login_page(browser):
 
 
 def test_can_redirect_to_register_page(browser):
-    browser.get(LoginPage.URL)
+    browser.open(LoginPage.PATH)
     browser.find_element(*LoginPage.CONTINUE_BTN).click()
     assert browser.title == 'Register Account'

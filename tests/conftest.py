@@ -9,7 +9,6 @@ SCREENSHOTS = os.path.expanduser("~/develop/selenium_prj/screenshots")
 
 
 def pytest_addoption(parser):
-    parser.addoption("--maximized", action="store_true", default=True, help="Maximize browser window")
     parser.addoption("--headless", action="store_true", help="Run headless")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
     parser.addoption("--url", default='https://demo.opencart.com/')
@@ -20,7 +19,8 @@ def pytest_addoption(parser):
 def browser(request):
     browser = request.config.getoption('--browser')
     headless = request.config.getoption('--headless')
-    maximized = request.config.getoption('--maximized')
+    url = request.config.getoption("--url")
+    timeout = request.config.getoption("--timeout")
 
     if browser == 'chrome':
         options = webdriver.ChromeOptions()
@@ -50,14 +50,13 @@ def browser(request):
 
     request.addfinalizer(make_screenshot_and_quit)
 
-    if maximized:
-        driver.maximize_window()
+    def open_url(path=""):
+        return driver.get(url + path)
+
+    driver.maximize_window()
+
+    driver.open = open_url
+    driver.open()
+    driver.timeout = timeout
 
     return driver
-
-
-
-
-@pytest.fixture
-def base_url(request):
-    return request.config.getoption("base_url")

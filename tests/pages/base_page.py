@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -7,9 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 class BasePage:
     def __init__(self, browser):
         self.browser = browser
-
-    def open(self, url):
-        return self.browser.get(url)
 
     def wait_element(self, locator: tuple, timeout=2):
         try:
