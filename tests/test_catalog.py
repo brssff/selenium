@@ -12,7 +12,7 @@ def test_catalog_page(browser):
     browser.find_element(*CatalogPage.SORT_BY)
     browser.find_element(*CatalogPage.SHOW_LIMIT)
     browser.find_element(*CatalogPage.FOOTER)
-    assert_element(CatalogPage.FOOTER[1], browser, timeout=2)
+    assert_element(CatalogPage.FOOTER, browser, timeout=2)
 
     product_thumbs = browser.find_elements(*CatalogPage.PRODUCT_THUMB)
     assert len(product_thumbs) == 12, f"Thumbs on page: {len(product_thumbs)}, but 12 expected"

@@ -1,9 +1,11 @@
 import pytest
 import os
 from selenium import webdriver
+from datetime import datetime
 from selenium.webdriver.opera.options import Options as OperaOptions
 
 DRIVERS = os.path.expanduser("~/develop/selenium_prj/drivers")
+SCREENSHOTS = os.path.expanduser("~/develop/selenium_prj/screenshots")
 
 
 def pytest_addoption(parser):
@@ -42,7 +44,11 @@ def browser(request):
     else:
         raise ValueError(f"Passed driver not supported: \'{browser}\'")
 
-    request.addfinalizer(driver.quit)
+    def make_screenshot_and_quit():
+        driver.save_screenshot(f"{SCREENSHOTS}/{str(datetime.timestamp(datetime.now()))}.png")
+        driver.quit()
+
+    request.addfinalizer(make_screenshot_and_quit)
 
     if maximized:
         driver.maximize_window()

@@ -11,6 +11,10 @@ class DashboardPage(BasePage):
     TRASH_BUTTON = (By.CSS_SELECTOR, ".fa.fa-trash-o")
     TABLE_CHECKBOX = (By.CSS_SELECTOR, "table.table-bordered.table-hover [type='checkbox']")
     WARNING_MSG = (By.CSS_SELECTOR, ".alert.alert-danger.alert-dismissible")
+    SAVE_BUTTON = (By.CSS_SELECTOR, ".fa.fa-save")
+    INPUT_NAME = (By.CSS_SELECTOR, "#input-name1")
+    DESCRIPTION_TEXT_AREA = (By.CSS_SELECTOR, ".note-editable.panel-body")
+    META_TAG_TITLE_INPUT = (By.CSS_SELECTOR, "#input-meta-title1")
 
     # навигация к странице с продуктами
     def nav_to_products_page(self):
@@ -26,5 +30,13 @@ class DashboardPage(BasePage):
         self.browser.switch_to_alert().accept()
         assert self.browser.find_element(*self.WARNING_MSG)
 
+    # добавление нового продукта
     def add_new_product(self):
-        pass
+        self.browser.find_element(*self.ADD_BUTTON).click()
+        self.wait_element(self.SAVE_BUTTON)
+        self.browser.find_element(*self.INPUT_NAME).clear()
+        self.browser.find_element(*self.INPUT_NAME).send_keys('Test product')
+        self.browser.find_element(*self.DESCRIPTION_TEXT_AREA).send_keys('Test text')
+        self.browser.find_element(*self.META_TAG_TITLE_INPUT).send_keys('test-tag')
+        self.browser.find_element(*self.SAVE_BUTTON).click()
+        self.wait_element(self.WARNING_MSG)
