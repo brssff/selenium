@@ -16,3 +16,18 @@ class LoginPage(BasePage):
     def nav_to_register_page(self):
         self.browser.open(self.PATH)
         self.browser.find_element(*self.CONTINUE_BTN).click()
+
+    def check_elements_exist(self):
+        self.browser.open(LoginPage.PATH)
+        self.wait_element(LoginPage.BREADCRUMBS)
+        self.wait_element(LoginPage.CONTINUE_BTN)
+        self.wait_element(LoginPage.LOGIN_BTN)
+        self.wait_element(LoginPage.RIGHT_COLUMN)
+        self.wait_element(LoginPage.LOGO)
+        self.wait_element(LoginPage.HEADER)
+        self.wait_element(LoginPage.FOOTER)
+
+    def redirect_to_register_page(self):
+        self.browser.open(self.PATH)
+        self.browser.find_element(*self.CONTINUE_BTN).click()
+        assert self.browser.title == 'Register Account'
