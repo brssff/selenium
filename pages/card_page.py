@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-from helper import assert_element
 
 
 class CardPage(BasePage):
@@ -25,5 +24,4 @@ class CardPage(BasePage):
     def add_to_cart(self):
         # добавить товар в корзину и получить сообщение об успешном действии
         self.browser.find_element(*CardPage.ADD_TO_CART).click()
-        assert_element(self.SUCCESS_MSG, self.browser, timeout=2)
-
+        self.wait_element(self.SUCCESS_MSG, timeout=2)
