@@ -1,4 +1,4 @@
-from tests.pages.main_page import MainPage
+from pages.main_page import MainPage
 
 
 def test_main_page(browser):

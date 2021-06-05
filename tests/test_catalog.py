@@ -1,5 +1,5 @@
-from ..helper import assert_element
-from .pages.catalog_page import CatalogPage
+from helper import assert_element
+from pages.catalog_page import CatalogPage
 
 
 def test_catalog_page(browser):

@@ -1,4 +1,4 @@
-from tests.pages.login_page import LoginPage
+from pages.login_page import LoginPage
 from helper import assert_element
 
 

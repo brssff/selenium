@@ -1,5 +1,5 @@
-from tests.pages.login_page import LoginPage
-from tests.pages.register_account_page import RegisterAccount
+from pages.login_page import LoginPage
+from pages.register_account_page import RegisterAccount
 
 
 def test_register_new_user(browser):
