@@ -25,7 +25,6 @@ class AdminLoginPage(BasePage):
         self.browser.find_element(*self.PASSWORD).clear()
         self.browser.find_element(*self.PASSWORD).send_keys("demo")
         self.browser.find_element(*self.LOGIN_BTN).click()
-        logging.info("Checking if log in was success")
         assert self.browser.title == 'Dashboard'
         assert 'user_token' in self.browser.current_url
         logging.info("Login success")
