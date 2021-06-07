@@ -6,4 +6,4 @@ def test_login_page_has_all_elements(browser):
 
 
 def test_can_redirect_to_register_page(browser):
-    LoginPage(browser).redirect_to_register_page()
+    LoginPage(browser).nav_to_register_page()

@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -28,6 +29,7 @@ class CatalogPage(BasePage):
         browser.find_element(*self.FOOTER)
 
     def check_product_thumbs(self):
+        logging.info("Checking if all product thumbs exist on page")
         product_thumbs = self.browser.find_elements(*CatalogPage.PRODUCT_THUMB)
         assert len(product_thumbs) == 12,\
             f"Thumbs on page: {len(product_thumbs)}, but 12 expected"

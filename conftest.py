@@ -1,14 +1,21 @@
 import pytest
 import os
+import logging
 from selenium import webdriver
 from selenium.webdriver.opera.options import Options as OperaOptions
 
 DRIVERS = os.path.expanduser("~/develop/selenium_prj/drivers")
 SCREENSHOTS = os.path.expanduser("~/develop/selenium_prj/screenshots")
+logging.basicConfig(
+    level=logging.INFO,
+    filename=os.path.expanduser('~/develop/selenium_prj/logs/selenium.log'),
+    format='%(asctime)s %(levelname)s %(filename)s %(message)s'
+)
 
 
 def pytest_addoption(parser):
     parser.addoption("--headless", action="store_true", help="Run headless")
+    #parser.addoption("--executor", "-E", default="127.0.0.1")
     parser.addoption("--browser", action="store", choices=["chrome", "firefox", "opera"], default="chrome")
     parser.addoption("--url", default='https://demo.opencart.com/')
     parser.addoption("--timeout", type=int, default=2)
@@ -45,6 +52,7 @@ def browser(request):
 
     def make_screenshot_and_quit():
         # driver.save_screenshot(f"{SCREENSHOTS}/{str(datetime.timestamp(datetime.now()))}.png")
+        logging.info("Teardown: quit browser..")
         driver.quit()
 
     request.addfinalizer(make_screenshot_and_quit)

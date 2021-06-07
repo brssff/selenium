@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -13,6 +14,7 @@ class CardPage(BasePage):
     SUCCESS_MSG = (By.CSS_SELECTOR, '.alert.alert-success.alert-dismissible')
 
     def check_elements_exist(self):
+        logging.info("Checking elements exist")
         browser = self.browser
         browser.open(self.PATH)
         browser.find_element(*CardPage.LOGO)
@@ -23,5 +25,6 @@ class CardPage(BasePage):
 
     def add_to_cart(self):
         # добавить товар в корзину и получить сообщение об успешном действии
+        logging.info("Adding an item to cart")
         self.browser.find_element(*CardPage.ADD_TO_CART).click()
         self.wait_element(self.SUCCESS_MSG, timeout=2)

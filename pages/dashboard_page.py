@@ -1,6 +1,7 @@
+import random
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
-import random
 
 
 class DashboardPage(BasePage):
@@ -18,6 +19,7 @@ class DashboardPage(BasePage):
 
     # навигация к странице с продуктами
     def nav_to_products_page(self):
+        logging.info("Navigate to products page")
         self.browser.find_element(*self.MENU_CATALOG).click()
         self.wait_element(self.PRODUCTS_SECTION)
         self.browser.find_element(*self.PRODUCTS_SECTION).click()
@@ -25,17 +27,19 @@ class DashboardPage(BasePage):
     # выбор случайного чекбокса (кроме общего) и удаление продукта
     def delete_random_product(self):
         checkboxes = len(self.browser.find_elements(*self.TABLE_CHECKBOX))
+        logging.info("Click on random checkbox and deleting relative product")
         self.browser.find_elements(*self.TABLE_CHECKBOX)[random.randint(1, checkboxes-1)].click()
         self.browser.find_element(*self.TRASH_BUTTON).click()
         self.browser.switch_to.alert.accept()
         assert self.browser.find_element(*self.WARNING_MSG)
+        logging.info("Product successfully deleted!")
 
     # добавление нового продукта
     def add_new_product(self):
+        logging.info("Starting to add new product")
         self.browser.find_element(*self.ADD_BUTTON).click()
         self.wait_element(self.SAVE_BUTTON)
-        self.browser.find_element(*self.INPUT_NAME).clear()
-        self.browser.find_element(*self.INPUT_NAME).send_keys('Test product')
+        self.clear_n_paste(self.INPUT_NAME, 'Test product')
         self.browser.find_element(*self.DESCRIPTION_TEXT_AREA).send_keys('Test text')
         self.browser.find_element(*self.META_TAG_TITLE_INPUT).send_keys('test-tag')
         self.browser.find_element(*self.SAVE_BUTTON).click()

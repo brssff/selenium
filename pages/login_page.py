@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -14,11 +15,13 @@ class LoginPage(BasePage):
     RIGHT_COLUMN = (By.CSS_SELECTOR, '#column-right')
 
     def nav_to_register_page(self):
+        logging.info("Navigating to register page")
         self.browser.open(self.PATH)
         self.browser.find_element(*self.CONTINUE_BTN).click()
 
     def check_elements_exist(self):
         self.browser.open(LoginPage.PATH)
+        logging.info("Starting wait for all elements exist on: {}".format(self.browser.current_url))
         self.wait_element(LoginPage.BREADCRUMBS)
         self.wait_element(LoginPage.CONTINUE_BTN)
         self.wait_element(LoginPage.LOGIN_BTN)
@@ -26,8 +29,4 @@ class LoginPage(BasePage):
         self.wait_element(LoginPage.LOGO)
         self.wait_element(LoginPage.HEADER)
         self.wait_element(LoginPage.FOOTER)
-
-    def redirect_to_register_page(self):
-        self.browser.open(self.PATH)
-        self.browser.find_element(*self.CONTINUE_BTN).click()
-        assert self.browser.title == 'Register Account'
+        logging.info("All elements exist on: {}".format(self.browser.current_url))

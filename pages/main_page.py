@@ -1,3 +1,4 @@
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -31,18 +32,21 @@ class MainPage(BasePage):
 
     def select_pound(self):
         self.check_currencies()
-        self.browser.find_element(*self.EUR).click()
-        assert self.browser.find_element(*self.CURRENCY_STATE).text == '€'
-        return self
-
-    def select_euro(self):
-        self.check_currencies()
+        logging.info(f"Change currency to pound")
         self.browser.find_element(*self.GBP).click()
         assert self.browser.find_element(*self.CURRENCY_STATE).text == '£'
         return self
 
+    def select_euro(self):
+        self.check_currencies()
+        logging.info(f"Change currency to euro")
+        self.browser.find_element(*self.EUR).click()
+        assert self.browser.find_element(*self.CURRENCY_STATE).text == '€'
+        return self
+
     def select_usd(self):
         self.check_currencies()
+        logging.info(f"Change currency to usd")
         self.browser.find_element(*self.USD).click()
         assert self.browser.find_element(*self.CURRENCY_STATE).text == '$'
         return self
