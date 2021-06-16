@@ -50,12 +50,12 @@ def browser(request):
     else:
         raise ValueError(f"Passed driver not supported: \'{browser}\'")
 
-    def make_screenshot_and_quit():
+    def fin():
         # driver.save_screenshot(f"{SCREENSHOTS}/{str(datetime.timestamp(datetime.now()))}.png")
         logging.info("Teardown: quit browser..")
         driver.quit()
 
-    request.addfinalizer(make_screenshot_and_quit)
+    request.addfinalizer(fin)
 
     def open_url(path=""):
         return driver.get(url + path)

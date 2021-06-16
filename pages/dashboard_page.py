@@ -1,9 +1,11 @@
+import allure
 import random
 import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 
+@allure.suite("Страница Dashboard после логина")
 class DashboardPage(BasePage):
 
     MENU_CATALOG = (By.CSS_SELECTOR, "#menu-catalog")
@@ -18,6 +20,7 @@ class DashboardPage(BasePage):
     META_TAG_TITLE_INPUT = (By.CSS_SELECTOR, "#input-meta-title1")
 
     # навигация к странице с продуктами
+    @allure.step("Навигация на страницу продуктов")
     def nav_to_products_page(self):
         logging.info("Navigate to products page")
         self.browser.find_element(*self.MENU_CATALOG).click()
@@ -25,6 +28,7 @@ class DashboardPage(BasePage):
         self.browser.find_element(*self.PRODUCTS_SECTION).click()
 
     # выбор случайного чекбокса (кроме общего) и удаление продукта
+    @allure.step("Удалить случайный продукт")
     def delete_random_product(self):
         checkboxes = len(self.browser.find_elements(*self.TABLE_CHECKBOX))
         logging.info("Click on random checkbox and deleting relative product")
@@ -35,12 +39,15 @@ class DashboardPage(BasePage):
         logging.info("Product successfully deleted!")
 
     # добавление нового продукта
+    @allure.step("Добавить новый продукт")
     def add_new_product(self):
+        new_product = 'Test product'
         logging.info("Starting to add new product")
         self.browser.find_element(*self.ADD_BUTTON).click()
         self.wait_element(self.SAVE_BUTTON)
-        self.clear_n_paste(self.INPUT_NAME, 'Test product')
+        self.clear_n_paste(self.INPUT_NAME, new_product)
         self.browser.find_element(*self.DESCRIPTION_TEXT_AREA).send_keys('Test text')
         self.browser.find_element(*self.META_TAG_TITLE_INPUT).send_keys('test-tag')
         self.browser.find_element(*self.SAVE_BUTTON).click()
-        self.wait_element(self.WARNING_MSG)
+        with allure.step(f"Успешно добавлен новый продукт: {new_product}"):
+            self.wait_element(self.WARNING_MSG)
