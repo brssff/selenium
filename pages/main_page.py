@@ -1,3 +1,5 @@
+import allure
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
@@ -17,32 +19,41 @@ class MainPage(BasePage):
     USD = (By.CSS_SELECTOR, '.currency-select.btn.btn-link.btn-block[name="USD"]')
     CURRENCY_STATE = (By.TAG_NAME, 'strong')
 
+    @allure.step("Выполнить поиск элементов")
     def check_elements_exist(self):
-        self.browser.find_element(*MainPage.CART_BUTTON)
-        self.browser.find_element(*MainPage.SEARCH_INPUT)
-        self.browser.find_element(*MainPage.PHONE)
-        self.browser.find_element(*MainPage.LOGO)
+        with allure.step("Все элементы найдены на странице"):
+            self.browser.find_element(*MainPage.CART_BUTTON)
+            self.browser.find_element(*MainPage.SEARCH_INPUT)
+            self.browser.find_element(*MainPage.PHONE)
+            self.browser.find_element(*MainPage.LOGO)
 
+    @allure.step("Посчитать количество свайперов")
     def count_swipers(self):
         assert len(self.browser.find_elements(*MainPage.SWIPERS)) == 2
 
     def check_currencies(self):
         self.browser.find_element(*self.CURRENCY_SELECTOR).click()
 
+    @allure.step("Выбрать фунты")
     def select_pound(self):
         self.check_currencies()
-        self.browser.find_element(*self.EUR).click()
-        assert self.browser.find_element(*self.CURRENCY_STATE).text == '€'
-        return self
-
-    def select_euro(self):
-        self.check_currencies()
+        logging.info(f"Change currency to pound")
         self.browser.find_element(*self.GBP).click()
         assert self.browser.find_element(*self.CURRENCY_STATE).text == '£'
         return self
 
+    @allure.step("Выбрать евро")
+    def select_euro(self):
+        self.check_currencies()
+        logging.info(f"Change currency to euro")
+        self.browser.find_element(*self.EUR).click()
+        assert self.browser.find_element(*self.CURRENCY_STATE).text == '€'
+        return self
+
+    @allure.step("Выбрать доллары")
     def select_usd(self):
         self.check_currencies()
+        logging.info(f"Change currency to usd")
         self.browser.find_element(*self.USD).click()
         assert self.browser.find_element(*self.CURRENCY_STATE).text == '$'
         return self

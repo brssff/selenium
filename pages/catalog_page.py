@@ -1,7 +1,10 @@
+import allure
+import logging
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 
+@allure.suite("Страница каталога товаров")
 class CatalogPage(BasePage):
     PATH = 'index.php?route=product/category&path=20'
 
@@ -28,6 +31,9 @@ class CatalogPage(BasePage):
         browser.find_element(*self.FOOTER)
 
     def check_product_thumbs(self):
+        logging.info("Checking if all product thumbs exist on page")
         product_thumbs = self.browser.find_elements(*CatalogPage.PRODUCT_THUMB)
-        assert len(product_thumbs) == 12,\
-            f"Thumbs on page: {len(product_thumbs)}, but 12 expected"
+
+        with allure.step("На странице 12 thumbnails"):
+            assert len(product_thumbs) == 12, \
+                f"Thumbs on page: {len(product_thumbs)}, but 12 expected"

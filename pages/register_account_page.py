@@ -1,6 +1,7 @@
+import logging, allure
+from faker import Faker
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
-from faker import Faker
 
 
 class RegisterAccount(BasePage):
@@ -13,7 +14,9 @@ class RegisterAccount(BasePage):
     AGREE_CHECKBOX = (By.CSS_SELECTOR, "[type='checkbox']")
     CONTINUE = (By.CSS_SELECTOR, ".btn.btn-primary")
 
+    @allure.step("Заполнить обязательные поля")
     def fill_inputs_and_register(self):
+        logging.info("Generating data and fills required inputs...")
         faker = Faker()
         self.clear_n_paste(self.FIRST_NAME, "Ivan")
         self.clear_n_paste(self.LAST_NAME, "Snow")
@@ -25,4 +28,6 @@ class RegisterAccount(BasePage):
         self.browser.find_element(*self.AGREE_CHECKBOX).click()
         self.browser.find_element(*self.CONTINUE).click()
         # TODO: как будет время, изменить на проверку через успешный логаут, а не тайтл
-        assert self.browser.title == 'Your Account Has Been Created!'
+        with allure.step("Успешая регистрация"):
+            assert self.browser.title == 'Your Account Has Been Created!'
+            logging.info("Successfully created new account!")

@@ -1,7 +1,10 @@
+import logging
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 
 
+@allure.suite("Страница логина в админку")
 class AdminLoginPage(BasePage):
     URL = 'https://demo.opencart.com/admin/'
 
@@ -15,12 +18,22 @@ class AdminLoginPage(BasePage):
     def open(self, url):
         return self.browser.get(url)
 
+    @allure.step("Логин в админку")
     def log_in(self):
-        self.open(self.URL)
+
+        logging.info("Opening page: {}".format(self.URL))
+        with allure.step(f"Открываем страницу: {self.URL}"):
+            self.open(self.URL)
+        logging.info("Inputting credentials for user")
+
         self.browser.find_element(*self.USERNAME).clear()
         self.browser.find_element(*self.USERNAME).send_keys("demo")
         self.browser.find_element(*self.PASSWORD).clear()
         self.browser.find_element(*self.PASSWORD).send_keys("demo")
-        self.browser.find_element(*self.LOGIN_BTN).click()
+
+        with allure.step("Логинимся в админку"):
+            self.browser.find_element(*self.LOGIN_BTN).click()
+
         assert self.browser.title == 'Dashboard'
         assert 'user_token' in self.browser.current_url
+        logging.info("Login success")

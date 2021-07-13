@@ -1,9 +1,11 @@
+import logging
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
+
     def __init__(self, browser):
         self.browser = browser
 
@@ -16,6 +18,7 @@ class BasePage:
 
     def clear_n_paste(self, locator: tuple, value):
         try:
+            logging.info(f"Sending {value} to {locator}")
             self.browser.find_element(*locator).clear()
             self.browser.find_element(*locator).send_keys(value)
         except NoSuchElementException:
